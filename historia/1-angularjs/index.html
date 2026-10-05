@@ -1,0 +1,44 @@
+<!doctype html>
+<!--
+  AngularJS 1.x (2010 – fin de soporte en enero 2022)
+  Ábrelo directo en el navegador, no necesita instalar nada.
+  Fíjate en: ng-app, ng-controller, $scope, ng-model (two-way binding), ng-repeat.
+-->
+<html lang="es" ng-app="directorio">
+<head>
+  <meta charset="utf-8" />
+  <title>AngularJS: así se hacía antes</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; }
+    li { padding: .25rem 0; }
+    .villano { color: #b3412f; }
+  </style>
+</head>
+<body ng-controller="ListaController">
+  <h1>Directorio (AngularJS 1.8)</h1>
+
+  <input ng-model="busqueda" placeholder="Buscar…" />
+  <p>Escribiste: {{ busqueda }}</p>
+
+  <ul>
+    <li ng-repeat="p in personajes | filter:{ name: busqueda }" ng-class="{ villano: p.affiliation !== 'Z Fighter' }">
+      {{ p.name }} — {{ p.race }}
+    </li>
+  </ul>
+
+  <script>
+    angular.module('directorio', [])
+      .controller('ListaController', function ($scope) {
+        // Todo vive en $scope: datos y funciones. El "digest cycle" revisa cambios.
+        $scope.busqueda = '';
+        $scope.personajes = [
+          { name: 'Goku', race: 'Saiyan', affiliation: 'Z Fighter' },
+          { name: 'Vegeta', race: 'Saiyan', affiliation: 'Z Fighter' },
+          { name: 'Bulma', race: 'Human', affiliation: 'Z Fighter' },
+          { name: 'Freezer', race: 'Frieza Race', affiliation: 'Army of Frieza' },
+        ];
+      });
+  </script>
+</body>
+</html>

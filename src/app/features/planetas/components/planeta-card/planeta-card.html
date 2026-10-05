@@ -1,0 +1,24 @@
+@let p = planeta();
+
+<article class="flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
+  <div class="relative flex justify-center bg-linear-to-b from-capsula-100 to-capsula-50 p-4">
+    @if (p.isDestroyed) {
+      <span class="absolute right-3 top-3 rounded-full bg-red-700 px-2.5 py-1 text-xs font-semibold text-white">
+        Destruido
+      </span>
+    }
+    @if (imagenFallo()) {
+      <svg lucideImageOff class="my-12 size-12 text-stone-400"></svg>
+    } @else {
+      <img [src]="p.image" [alt]="p.name" loading="lazy" (error)="imagenFallo.set(true)" class="h-auto w-full object-contain" />
+    }
+  </div>
+
+  <div class="flex flex-1 flex-col gap-2 p-4">
+    <h3 class="flex items-center gap-2 text-lg font-semibold leading-tight">
+      <svg lucideGlobe class="size-5 text-capsula-700"></svg>
+      {{ p.name }}
+    </h3>
+    <p class="text-sm leading-relaxed text-stone-600">{{ p.description }}</p>
+  </div>
+</article>
